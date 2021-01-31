@@ -14,12 +14,10 @@ class _HomePageState extends State<HomePage> {
   String type = "video";
   List<YT_API> ytResult = [];
 
-// Methods
+  // Methods
   callAPI() async {
     ApiService.init(type: type);
     ytResult = await ApiService.getResult();
-
-    setState(() {});
   }
 
   @override
