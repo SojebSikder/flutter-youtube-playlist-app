@@ -11,20 +11,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Initialize variable
-  String type = "video";
+  //
   List<YT_API> ytResult = [];
 
   // Methods
   callAPI() async {
+    String type = "video";
     ApiService.init(type: type);
-    ytResult = await ApiService.getResult();
+    ytResult = await ApiService.getResult(searchQuery: "sojebsoft");
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
     callAPI();
-    print('hello');
   }
 
   @override

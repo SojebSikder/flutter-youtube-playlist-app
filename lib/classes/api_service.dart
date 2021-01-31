@@ -4,7 +4,11 @@ import 'package:youtube_api/youtube_api.dart';
  * Execute Youtube data api
  */
 class ApiService {
-  static String key = "YOUR-API-KEY";
+  /**
+   * Api key
+   */
+  static String key =
+      "AIzaSyDSXnDKyvl-xgZN0WkTM1q5QPZmbpJBhIQ"; //"YOUR-API-KEY";
 
   static YoutubeAPI ytApi;
   static List<YT_API> ytResult = [];
@@ -17,14 +21,14 @@ class ApiService {
    * Initialize
    */
   static init({String type = "video"}) {
-    ytApi = YoutubeAPI(ApiService.key, type: type);
+    ytApi = YoutubeAPI(key, type: type);
   }
 
   /**
    * Return all data
    */
-  static getResult() async {
-    String query = "sojebsoft";
+  static getResult({String searchQuery}) async {
+    String query = searchQuery;
     ytResult = await ytApi.search(query);
     ytResult = await ytApi.nextPage();
     return ytResult;
