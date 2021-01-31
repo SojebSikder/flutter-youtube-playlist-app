@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutteryoutubeplaylistapp/classes/api_service.dart';
+import 'package:flutteryoutubeplaylistapp/components/videocard.dart';
+import 'package:flutteryoutubeplaylistapp/pages/Singlevideo.dart';
 import 'package:youtube_api/youtube_api.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,21 +11,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Initialize variable
-  //
-  static String key =
-      "AIzaSyDSXnDKyvl-xgZN0WkTM1q5QPZmbpJBhIQ"; //"YOUR-API-KEY";
-
-  //String type = "channel";
-  //String type = "video";
-  //String type = "playlist";
-  YoutubeAPI ytApi = YoutubeAPI(key, type: "playlist");
+  String type = "video";
   List<YT_API> ytResult = [];
 
 // Methods
   callAPI() async {
-    String query = "sojebsoft";
-    ytResult = await ytApi.search(query);
-    ytResult = await ytApi.nextPage();
+    ApiService.init(type: type);
+    ytResult = await ApiService.getResult();
+
     setState(() {});
   }
 
@@ -41,49 +37,12 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: ytResult.length,
-          itemBuilder: (_, index) => listItem(index),
-        ),
-      ),
-    );
-  }
-
-  Widget listItem(index) {
-    return Card(
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 7.0),
-        padding: EdgeInsets.all(12.0),
-        child: Row(
-          children: <Widget>[
-            Image.network(
-              ytResult[index].thumbnail['default']['url'],
+            itemCount: ytResult.length,
+            itemBuilder: (_, index) => ListItem(
+                  index: index,
+                  ytResult: ytResult,
+                ) //listItem(index),
             ),
-            Padding(padding: EdgeInsets.only(right: 20.0)),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    ytResult[index].title,
-                    softWrap: true,
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  Padding(padding: EdgeInsets.only(bottom: 1.5)),
-                  Text(
-                    ytResult[index].channelTitle,
-                    softWrap: true,
-                  ),
-                  Padding(padding: EdgeInsets.only(bottom: 3.0)),
-                  Text(
-                    ytResult[index].url,
-                    softWrap: true,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
       ),
     );
   }
