@@ -89,7 +89,7 @@ packages:
     source: sdk
     version: "0.0.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -212,6 +212,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.0"
+  youtube_api_v3:
+    dependency: "direct main"
+    description:
+      name: youtube_api_v3
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   youtube_player_flutter:
     dependency: "direct main"
     description:

@@ -31,6 +31,9 @@ dependencies:
   
   youtube_api: ^0.8.0
   youtube_player_flutter: ^7.0.0+7
+  youtube_api_v3: ^0.0.3
+  http: ^0.12.2
+
 
 dev_dependencies:
   flutter_test:
